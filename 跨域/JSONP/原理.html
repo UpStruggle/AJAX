@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>原理演示</title>
+    <style>
+        #result {
+            width: 200px;
+            height: 200px;
+            border: 1px solid rgb(197, 56, 197);
+        }
+    </style>
+</head>
+
+<body>
+    <div id='result'></div>
+    <script>
+        //处理数据
+        function handle(data) {
+            //获取 result 元素
+            const result = document.getElementById('result');
+            result.innerHTML = data.name;
+        }
+    </script>
+
+    <!-- 利用 live server 插件运行获得一个地址 -->
+    <!--与 <script src="./js/app.js"></script>  所得结果一样-->
+    <!-- <script src="http://127.0.0.1:5500/%E4%BB%A3%E7%A0%81/%E8%B7%A8%E5%9F%9F/JSONP/%E5%8E%9F%E7%90%86.html"></script> -->
+    <script src="http://127.0.0.1:8000/jsonp-server"></script>
+    <!-- script 标签返回的应该是js语句 ，返回的结果的形式是一个函数调用，而函数的参数就想给客户端返回的结果数据-->
+    <!-- 函数必须提前说明，否则会报错 -->
+</body>
+
+</html>
