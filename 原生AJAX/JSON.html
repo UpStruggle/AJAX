@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>服务端响应JSON的操作</title>
+    <style>
+        #result {
+            width: 200px;
+            height: 100px;
+            border: solid 1px #9900bb;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="result"></div>
+    <!-- AJAX请求的基本操作 -->
+    <script>
+        const result = document.getElementById('result');
+
+        window.onkeydown = function() {
+            //1.发送请求
+            const xhr = new XMLHttpRequest(); //xhr 一般代指AJAX
+            //设置响应体数据的类型 （自动转换）
+            xhr.responseType = 'JSON';
+            //2.初始化 设置请求方法和url
+            xhr.open("GET", 'http://127.0.0.1:8000/JSON-server');
+            //3.发送
+            xhr.send();
+            //4.事件绑定 处理服务端返回的结果
+            //4.事件绑定 处理服务端返回的结果
+            xhr.onreadystatechange = function() {
+                //判断(服务端返回了所有的结果)
+                if (xhr.readyState === 4) {
+                    //判断响应码 200 404 403 401 500 (2开头的都表示成功)
+                    if (xhr.status >= 200 && xhr.status < 300) { //设置result 文本
+                        //result.innerHTML = xhr.response;
+                        //1.手动对数据转化
+                        let data = JSON.parse(xhr.response);
+                        // console.log(data);
+                        //result.innerHTML = data.name;
+                        //2.自动转换
+                        console.log(xhr.response);
+                        result.innerHTML = xhr.response.name;
+
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
